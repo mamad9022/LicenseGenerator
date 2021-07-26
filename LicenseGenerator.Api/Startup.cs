@@ -2,16 +2,10 @@ using LicenseGenerator.Application;
 using LicenseGenerator.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LicenseGenerator.Api
 {
@@ -52,10 +46,10 @@ namespace LicenseGenerator.Api
 
             app.UseRouting();
 
-            app.UseCors(x => x
-               .AllowAnyMethod()
-               .AllowAnyHeader()
-               .AllowCredentials()); // allow credentials
+            app.UseCors(builder => builder
+             .AllowAnyOrigin()
+             .AllowAnyMethod()
+             .AllowAnyHeader());
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
