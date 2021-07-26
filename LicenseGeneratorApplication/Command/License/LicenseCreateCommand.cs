@@ -13,7 +13,7 @@ namespace LicenseGeneratorApplication.Command.License
         public class FeatureLicense
         {
             public string Ename { get; set; }
-            public string Value { get; set; }
+            public int Value { get; set; }
         }
     }
 

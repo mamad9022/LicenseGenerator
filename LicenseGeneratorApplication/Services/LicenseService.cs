@@ -43,23 +43,33 @@ namespace LicenseGenerator.Application.Services
                    (new ApiMessage("محصول یافت نشد")));
 
 
-            List<string> listValue = new List<string>();
+            List<FeatureDetail> listValue = new List<FeatureDetail>();
+            List<string> lisenceList = new List<string>();
+
             foreach (var item in command.Features)
             {
-                listValue.Add(item.Value);
+                listValue.Add(new FeatureDetail
+                {
+                    Name = item.Ename,
+                    Value = item.Value
+                });
             }
 
             var feature = new Feature
             {
-                ExpireDate = command.ExpireDate,
-                SystemId = command.SystemId,
-                CustomerNumber = customer.Code,
-                Values = listValue
+                ExpireDate = command.ExpireDate.Date,
+                SystemId = EncryptProvider.AESDecrypt(command.SystemId, key, Iv),
             };
 
-            var lisence = JsonSerializer.Serialize(feature);
+            foreach (var item in listValue)
+            {
+                string p = "\u0022" + item.Name + "\u0022" + ":" + item.Value;
+                lisenceList.Add(p);
+            }
 
-            var data = EncryptProvider.AESEncrypt(lisence, key, Iv);
+            var license = CreateLicense(feature, lisenceList);
+
+            var data = EncryptProvider.AESEncrypt(license, key, Iv);
 
             await SaveInLog(command.CustomerId, command.ProductId, data);
 
@@ -67,6 +77,21 @@ namespace LicenseGenerator.Application.Services
 
         }
 
+        public async Task<PagedList<LicenseLogDto>> GetPagingList(PagingOptions request)
+        {
+            IQueryable<LicenseLog> licenseLogs = _context.LicenseLogs.Include(x => x.Customer).Include(x => x.Products).OrderByDescending(x=>x.CreationTime);
+
+            if (!string.IsNullOrWhiteSpace(request.Query))
+            {
+                licenseLogs = licenseLogs.Where(x => x.Customer.Name.Contains(request.Query));
+            }
+
+            var licenseLogList = await GetPagedAsync(request.Page, request.Limit, licenseLogs);
+
+            return licenseLogList.MapTo<LicenseLogDto>(_mapper);
+        }
+
+        #region SaveInLog
         private async Task SaveInLog(Guid customerId, Guid productId, string data)
         {
             var license = new LicenseLog
@@ -81,28 +106,38 @@ namespace LicenseGenerator.Application.Services
             _context.LicenseLogs.Add(license);
             await _context.SaveAsync();
         }
+        #endregion
 
-        public async Task<PagedList<LicenseLogDto>> GetPagingList(PagingOptions request)
+        #region CreateLicense
+        private string CreateLicense(Feature feature, List<string> lisenceList)
         {
-            IQueryable<LicenseLog> licenseLogs = _context.LicenseLogs.Include(x=>x.Customer).Include(x=>x.Products);
-
-            if (!string.IsNullOrWhiteSpace(request.Query))
+            string license = "{";
+            foreach (var item in lisenceList)
             {
-                licenseLogs = licenseLogs.Where(x => x.Customer.Name.Contains(request.Query));
+                license += item + ",";
             }
-
-            var licenseLogList = await GetPagedAsync(request.Page, request.Limit, licenseLogs);
-
-            return licenseLogList.MapTo<LicenseLogDto>(_mapper);
+            var featureSerializer = JsonSerializer.Serialize(feature);
+            char[] MyChar = { '{' };
+            featureSerializer = featureSerializer.TrimStart(MyChar);
+            return license += featureSerializer;
         }
+        #endregion
 
-
+        #region Feature 
         private class Feature
         {
-            public int CustomerNumber { get; set; }
             public string SystemId { get; set; }
             public DateTime ExpireDate { get; set; }
-            public List<string>Values { get; set; }
         }
+        #endregion
+
+        #region FeatureDetail
+        private class FeatureDetail
+        {
+            public string Name { get; set; }
+            public int Value { get; set; }
+        }
+        #endregion
+
     }
 }
