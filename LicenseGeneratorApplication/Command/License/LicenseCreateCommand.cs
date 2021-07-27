@@ -7,7 +7,7 @@ namespace LicenseGeneratorApplication.Command.License
     {
         public Guid ProductId { get; set; }
         public Guid CustomerId { get; set; }
-        public DateTime ExpireDate { get; set; }
+        public string ExpireDate { get; set; }
         public string SystemId { get; set; }
         public List<FeatureLicense> Features { get; set; }
         public class FeatureLicense

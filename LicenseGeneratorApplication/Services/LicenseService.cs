@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using DNTPersianUtils.Core;
 
 namespace LicenseGenerator.Application.Services
 {
@@ -57,7 +58,7 @@ namespace LicenseGenerator.Application.Services
 
             var feature = new Feature
             {
-                ExpireDate = command.ExpireDate.Date,
+                ExpireDate = Convert.ToDateTime(command.ExpireDate).Date,
                 SystemId = EncryptProvider.AESDecrypt(command.SystemId, key, Iv),
             };
 

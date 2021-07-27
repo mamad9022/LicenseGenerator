@@ -41,7 +41,7 @@ namespace LicenseGenerator.Api.Controllers
             if (result.Success == false)
                 return result.ApiResult;
 
-            return CreatedAtAction(nameof(Get), new { result.Data }, result.Data);
+            return CreatedAtAction(nameof(Get), new { result.Data }, result);
         }
     }
 }
