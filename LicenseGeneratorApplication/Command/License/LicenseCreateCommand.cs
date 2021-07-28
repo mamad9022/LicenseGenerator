@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LicenseGeneratorApplication.Command.License
+namespace LicenseGenerator.Application.Command.License
 {
     public class LicenseCreateCommand
     {

@@ -20,6 +20,11 @@ namespace LicenseGenerator.Model.Models
         public DateTime CreationTime { get; set; }
 
         /// <summary>
+        /// تاریخ انقضا
+        /// </summary>
+        public DateTime ExpireDate { get; set; }
+
+        /// <summary>
         /// لایسنس
         /// </summary>
         public string License { get; set; }

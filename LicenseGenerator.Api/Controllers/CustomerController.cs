@@ -1,11 +1,12 @@
 ﻿using LicenseGenerator.Application.Interface.Customer;
-using LicenseGenerator.Common.Helper.Messages;
 using LicenseGenerator.Common.Helper.Pagination;
 using LicenseGeneratorApplication.Command.Customer;
-using LicenseGeneratorApplication.Dtos.Customer;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LicenseGenerator.Application.Command.Customer;
+using LicenseGenerator.Application.Dtos.Customer;
+using LicenseGenerator.Common.Helper.Message;
 
 namespace LicenseGenerator.Api.Controllers
 {

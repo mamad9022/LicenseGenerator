@@ -4,15 +4,15 @@ using LicenseGenerator.Application.Interface.Product;
 using LicenseGenerator.Common.Helper.Pagination;
 using LicenseGenerator.Common.Result;
 using LicenseGenerator.Model.Models;
-using LicenseGeneratorApplication.Command.Product;
-using LicenseGeneratorApplication.Dtos.Product;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
+using LicenseGenerator.Application.Command.Product;
+using LicenseGenerator.Application.Dtos.Product;
+using LicenseGenerator.Common.Helper.Message;
 using Microsoft.AspNetCore.Mvc;
-using LicenseGenerator.Common.Helper.Messages;
 using LicenseGenerator.Common.Utilities;
 
 namespace LicenseGenerator.Application.Services

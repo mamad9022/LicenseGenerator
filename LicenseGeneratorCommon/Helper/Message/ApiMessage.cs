@@ -1,4 +1,4 @@
-﻿namespace LicenseGenerator.Common.Helper.Messages
+﻿namespace LicenseGenerator.Common.Helper.Message
 {
     public class ApiMessage
     {

@@ -1,4 +1,4 @@
-﻿namespace LicenseGeneratorApplication.Command.Customer
+﻿namespace LicenseGenerator.Application.Command.Customer
 {
     public class CustomerAddCommand
     {

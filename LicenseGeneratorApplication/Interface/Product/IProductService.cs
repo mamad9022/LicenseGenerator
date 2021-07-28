@@ -1,10 +1,10 @@
 ﻿using LicenseGenerator.Common.Helper.Pagination;
 using LicenseGenerator.Common.Result;
-using LicenseGeneratorApplication.Command.Product;
-using LicenseGeneratorApplication.Dtos.Product;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LicenseGenerator.Application.Command.Product;
+using LicenseGenerator.Application.Dtos.Product;
 
 namespace LicenseGenerator.Application.Interface.Product
 {

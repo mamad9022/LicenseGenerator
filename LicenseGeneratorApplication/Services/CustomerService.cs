@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
 using LicenseGenerator.Application.Common.Interface;
 using LicenseGenerator.Application.Interface.Customer;
-using LicenseGenerator.Common.Helper.Messages;
 using LicenseGenerator.Common.Helper.Pagination;
 using LicenseGenerator.Common.Result;
 using LicenseGenerator.Model.Models;
-using LicenseGeneratorApplication.Command.Customer;
-using LicenseGeneratorApplication.Dtos.Customer;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LicenseGenerator.Application.Command.Customer;
+using LicenseGenerator.Application.Dtos.Customer;
 using LicenseGenerator.Common.Utilities;
 
 namespace LicenseGenerator.Application.Services

@@ -1,9 +1,8 @@
-﻿using LicenseGeneratorApplication.Dtos.ProductDetail;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using LicenseGenerator.Application.Dtos.ProductDetail;
 
-namespace LicenseGeneratorApplication.Dtos.Product
+namespace LicenseGenerator.Application.Dtos.Product
 {
    public class ProductDto
     {

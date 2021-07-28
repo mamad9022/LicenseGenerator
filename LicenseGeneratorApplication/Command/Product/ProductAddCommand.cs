@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LicenseGeneratorApplication.Command.Product
+namespace LicenseGenerator.Application.Command.Product
 {
     public class ProductAddCommand
     {

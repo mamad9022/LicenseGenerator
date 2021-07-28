@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using LicenseGeneratorApplication.Command.License;
+using LicenseGenerator.Application.Command.License;
 
 namespace LicenseGenerator.Application.Validations
 {

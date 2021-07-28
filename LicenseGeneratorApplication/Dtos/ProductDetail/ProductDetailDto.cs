@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LicenseGeneratorApplication.Dtos.ProductDetail
+namespace LicenseGenerator.Application.Dtos.ProductDetail
 {
     public class ProductDetailDto
     {

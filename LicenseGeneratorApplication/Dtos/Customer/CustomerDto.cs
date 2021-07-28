@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LicenseGeneratorApplication.Dtos.Customer
+namespace LicenseGenerator.Application.Dtos.Customer
 {
     public class CustomerDto
     {

@@ -1,13 +1,13 @@
 ﻿using System;
 using AutoMapper;
+using LicenseGenerator.Application.Command.Customer;
+using LicenseGenerator.Application.Command.License;
+using LicenseGenerator.Application.Dtos.Customer;
+using LicenseGenerator.Application.Dtos.LicenseLog;
+using LicenseGenerator.Application.Dtos.Product;
+using LicenseGenerator.Application.Dtos.ProductDetail;
 using LicenseGenerator.Model.Models;
 using LicenseGeneratorApplication.Command.Customer;
-using LicenseGeneratorApplication.Command.License;
-using LicenseGeneratorApplication.Command.Product;
-using LicenseGeneratorApplication.Dtos.Customer;
-using LicenseGeneratorApplication.Dtos.LicenseLog;
-using LicenseGeneratorApplication.Dtos.Product;
-using LicenseGeneratorApplication.Dtos.ProductDetail;
 
 namespace LicenseGenerator.Application.Common.AutoMapper
 {

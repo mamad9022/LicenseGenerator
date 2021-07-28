@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LicenseGeneratorCommon.Dtos
+namespace LicenseGenerator.Common.Dtos
 {
 
     /// <summary>

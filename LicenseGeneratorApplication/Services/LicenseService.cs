@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using LicenseGenerator.Application.Common.Interface;
 using LicenseGenerator.Application.Interface.License;
-using LicenseGenerator.Common.Helper.Messages;
 using LicenseGenerator.Common.Helper.Pagination;
 using LicenseGenerator.Common.Result;
 using LicenseGenerator.Model.Models;
-using LicenseGeneratorApplication.Command.License;
-using LicenseGeneratorApplication.Dtos.LicenseLog;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NETCore.Encrypt;
@@ -15,7 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using DNTPersianUtils.Core;
+using LicenseGenerator.Application.Command.License;
+using LicenseGenerator.Application.Dtos.LicenseLog;
+using LicenseGenerator.Common.Helper.Message;
 using LicenseGenerator.Common.Utilities;
 
 namespace LicenseGenerator.Application.Services
@@ -73,7 +72,7 @@ namespace LicenseGenerator.Application.Services
 
             var data = EncryptProvider.AESEncrypt(license, key, Iv);
 
-            await SaveInLog(command.CustomerId, command.ProductId, data);
+            await SaveInLog(command.CustomerId, command.ProductId, data, feature.ExpireDate);
 
             return Result<string>.SuccessFul(data);
 
@@ -93,14 +92,15 @@ namespace LicenseGenerator.Application.Services
         }
 
         #region SaveInLog
-        private async Task SaveInLog(Guid customerId, Guid productId, string data)
+        private async Task SaveInLog(Guid customerId, Guid productId, string data, DateTime expireDate)
         {
             var license = new LicenseLog
             {
+                Id = Guid.NewGuid(),
                 CustomerId = customerId,
                 CreationTime = DateTime.Now,
                 ProductId = productId,
-                Id = Guid.NewGuid(),
+                ExpireDate = expireDate,
                 License = data
             };
 

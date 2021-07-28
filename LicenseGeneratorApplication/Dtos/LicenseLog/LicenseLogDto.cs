@@ -1,8 +1,8 @@
-﻿using LicenseGeneratorApplication.Dtos.Customer;
-using System;
-using LicenseGeneratorApplication.Dtos.Product;
+﻿using System;
+using LicenseGenerator.Application.Dtos.Customer;
+using LicenseGenerator.Application.Dtos.Product;
 
-namespace LicenseGeneratorApplication.Dtos.LicenseLog
+namespace LicenseGenerator.Application.Dtos.LicenseLog
 {
     public class LicenseLogDto
     {
@@ -25,6 +25,11 @@ namespace LicenseGeneratorApplication.Dtos.LicenseLog
         /// تاریخ ایجاد
         /// </summary>
         public DateTime CreationTime { get; set; }
+
+        /// <summary>
+        /// تاریخ انقضا
+        /// </summary>
+        public DateTime ExpireDate { get; set; }
 
         /// <summary>
         /// شناسه مشتری

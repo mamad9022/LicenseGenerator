@@ -4,8 +4,6 @@ using LicenseGenerator.Application.Interface.License;
 using LicenseGenerator.Application.Interface.Product;
 using LicenseGenerator.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 
 
 namespace LicenseGenerator.Application
