@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using DNTPersianUtils.Core;
+using LicenseGenerator.Common.Utilities;
 
 namespace LicenseGenerator.Application.Services
 {
@@ -80,12 +81,11 @@ namespace LicenseGenerator.Application.Services
 
         public async Task<PagedList<LicenseLogDto>> GetPagingList(PagingOptions request)
         {
-            IQueryable<LicenseLog> licenseLogs = _context.LicenseLogs.Include(x => x.Customer).Include(x => x.Products).OrderByDescending(x=>x.CreationTime);
-
-            if (!string.IsNullOrWhiteSpace(request.Query))
-            {
-                licenseLogs = licenseLogs.Where(x => x.Customer.Name.Contains(request.Query));
-            }
+            IQueryable<LicenseLog> licenseLogs = _context.LicenseLogs
+                .Include(x => x.Customer)
+                .Include(x => x.Products)
+                .OrderByDescending(x=>x.CreationTime)
+                .DynamicWhere(request.Query);
 
             var licenseLogList = await GetPagedAsync(request.Page, request.Limit, licenseLogs);
 

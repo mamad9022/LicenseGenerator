@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using LicenseGenerator.Common.Helper.Messages;
+using LicenseGenerator.Common.Utilities;
 
 namespace LicenseGenerator.Application.Services
 {
@@ -74,12 +75,9 @@ namespace LicenseGenerator.Application.Services
 
         public async Task<PagedList<ProductDto>> GetPagingList(PagingOptions request)
         {
-            IQueryable<Product> products = _context.Products.Include(e => e.ProductDetails);
-
-            if (!string.IsNullOrWhiteSpace(request.Query))
-            {
-                products = products.Where(x => x.Name.Contains(request.Query));
-            }
+            IQueryable<Product> products = _context.Products
+                .Include(e => e.ProductDetails)
+                .DynamicWhere(request.Query);
 
             var productList = await GetPagedAsync(request.Page, request.Limit, products);
 

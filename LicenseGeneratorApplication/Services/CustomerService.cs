@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LicenseGenerator.Common.Utilities;
 
 namespace LicenseGenerator.Application.Services
 {
@@ -42,12 +43,7 @@ namespace LicenseGenerator.Application.Services
 
         public async Task<PagedList<CustomerDto>> GetPagingList(PagingOptions request)
         {
-            IQueryable<Customer> customers = _context.Customers;
-
-            if (!string.IsNullOrWhiteSpace(request.Query))
-            {
-                customers = customers.Where(x => x.Name.Contains(request.Query));
-            }
+            IQueryable<Customer> customers = _context.Customers.DynamicWhere(request.Query);
 
             var customerList = await GetPagedAsync(request.Page, request.Limit, customers);
 
